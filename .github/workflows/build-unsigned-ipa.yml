@@ -23,14 +23,18 @@ jobs:
 
       - name: Build (unsigned, arm64)
         run: |
-          # 手写 pbxproj 没有 shared scheme，用 -target 绕开 "Scheme is not configured"
+          # 手写 pbxproj 没有 shared scheme，用 -target 绕开 "Scheme is not configured"。
+          # 注意：xcodebuild 不允许 -target 与 -derivedDataPath 同时出现
+          # （会报 "The flag -scheme, -testProductsPath, or -xctestrun is required"），
+          # 所以用 SYMROOT/OBJROOT 指定产物目录，效果等同。
           xcodebuild \
             -project Aqing.xcodeproj \
             -target Aqing \
             -configuration Release \
             -sdk iphoneos \
-            -derivedDataPath build/DerivedData \
             -arch arm64 \
+            SYMROOT="$PWD/build/Products" \
+            OBJROOT="$PWD/build/Intermediates" \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
@@ -38,8 +42,10 @@ jobs:
 
       - name: Pack IPA
         run: |
+          APP="build/Products/Release-iphoneos/Aqing.app"
+          test -d "$APP" || { echo "没找到 $APP"; find build -maxdepth 4 -name '*.app' -print; exit 1; }
           mkdir -p build/Payload
-          cp -R build/DerivedData/Build/Products/Release-iphoneos/Aqing.app build/Payload/
+          cp -R "$APP" build/Payload/
           (cd build && zip -qr Aqing-unsigned.ipa Payload)
 
       - name: Verify

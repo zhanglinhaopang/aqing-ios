@@ -100,9 +100,9 @@ final class ConnectViewController: UIViewController, UITextFieldDelegate {
         goButton.heightAnchor.constraint(equalToConstant: 52).isActive = true
         goButton.addTarget(self, action: #selector(connect), for: .touchUpInside)
 
-        hintLabel.text = "地址填公网入口（出门）或 https://192.168.9.10:8444/out/app/（在家）。\n"
-            + "令牌和 NAS 上的 OUT_TOKEN 一致，只存在这台手机的钥匙串里。\n"
-            + "连不上不会丢数据，用 aqing://setup 随时回来改。"
+        hintLabel.text = "默认已经填好公网入口 https://aqing.duckdns.org:18085/out/app/，\n"
+            + "在家想走局域网也可以换成 https://192.168.9.10:8444/out/app/。\n"
+            + "令牌和 NAS 上的 OUT_TOKEN 一致，只存在这台手机的钥匙串里。"
         hintLabel.font = UIFont.systemFont(ofSize: 12)
         hintLabel.textColor = AQColor.dim
         hintLabel.numberOfLines = 0

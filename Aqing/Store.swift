@@ -16,8 +16,9 @@ extension Notification.Name {
 }
 
 enum Store {
-    /// 零成本公网入口：Tailscale Funnel 自带 ts.net 域名与真实证书，不用买域名。
-    static let defaultBaseURL = "https://dafeiyu-nas.taile18672.ts.net:10000/out/app/"
+    /// 公网入口：DuckDNS 固定域名 + Let's Encrypt 真证书，IPv6 直连，不过任何隧道。
+    /// 前缀变了 DDNS 会自己跟，证书 90 天自动续，这个地址长期有效。
+    static let defaultBaseURL = "https://aqing.duckdns.org:18085/out/app/"
 
     private static let defaults = UserDefaults.standard
 
