@@ -9,7 +9,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let ws = scene as? UIWindowScene else { return }
         let w = UIWindow(windowScene: ws)
         w.backgroundColor = AQColor.background
-        w.rootViewController = makeRoot()
+        w.rootViewController = Self.makeRoot()
         w.makeKeyAndVisible()
         window = w
         if let url = connectionOptions.urlContexts.first?.url {

@@ -80,11 +80,9 @@ final class ConnectViewController: UIViewController, UITextFieldDelegate {
         pasteButton.contentHorizontalAlignment = .left
         pasteButton.addTarget(self, action: #selector(pasteToken), for: .touchUpInside)
 
-        let trustRow = UIStackView(arrangedSubviews: [trustSwitch, {
-            let l = makeLabel("信任家里局域网的自签证书", size: 14, bold: false, color: AQColor.text)
-            l.numberOfLines = 0
-            return l
-        }()])
+        let trustLabel = makeLabel("信任家里局域网的自签证书", size: 14, bold: false, color: AQColor.text)
+        trustLabel.numberOfLines = 0
+        let trustRow = UIStackView(arrangedSubviews: [trustSwitch, trustLabel])
         trustRow.axis = .horizontal
         trustRow.spacing = 12
         trustRow.alignment = .center
